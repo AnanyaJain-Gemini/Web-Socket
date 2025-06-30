@@ -39,6 +39,7 @@ It is standardized by ***RFC 6455*** and supported by most modern browsers and s
  **1. Browser-native WebSocket API** (Standard way)
 ```js
 // Create a new WebSocket connection
+// const socket = new WebSocket(url[, protocols]);
 const socket = new WebSocket('wss://echo.websocket.org');
 
 // Handle connection open
