@@ -195,6 +195,6 @@ server.on('connection', (socket) => {
 | `readyState`     | 0 (CONNECTING), 1 (OPEN), 2 (CLOSING), 3 (CLOSED) |
 | `protocol`       | Subprotocol agreed (if any)                   |
 | `bufferedAmount` | Bytes of data queued for sending (client-side only)                 |
-| `binaryType`     | `"blob"` (default) or `"arraybuffer"`; `nodebuffer` default in Node.js            |
+| `binaryType`     | `"blob"` (default) or `"arraybuffer"`; `"nodebuffer"` default in Node.js            |
 | `extensions`     | Negotiated extensions (e.g., compression)         |
 
