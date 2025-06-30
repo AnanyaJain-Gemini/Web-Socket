@@ -34,55 +34,35 @@ It is standardized by ***RFC 6455*** and supported by most modern browsers and s
 
 > **When to use Socket.IO:** When you need robust support, fallback, auto-reconnect, and rooms.
 
-### 🔹Basic Example – Chat App:
+### 🔹Basic Example:
 
-A simple browser-based chat using WebSocket.
-
-**-> Server - Node.js with `ws`:**
 ```js
-// server.js
-const WebSocket = require('ws');
-const server = new WebSocket.Server({ port: 8080 });
+// Create a new WebSocket connection
+const socket = new WebSocket('wss://echo.websocket.org');
 
-server.on('connection', socket => {
-  console.log('Client connected');
+// Handle connection open
+socket.onopen = (event) => {
+  console.log('Connection established');
 
-  socket.on('message', message => {
-    console.log(`Received: ${message}`);
-    // Broadcast to all connected clients
-    server.clients.forEach(client => {
-      if (client.readyState === WebSocket.OPEN) {
-        client.send(`Echo: ${message}`);
-      }
-    });
-  });
+  // Send a message
+  socket.send('Hello, WebSocket server!');
+};
 
-  socket.on('close', () => console.log('Client disconnected'));
-});
-```
-**-> Client-side HTML + JS**
-```html
-<!DOCTYPE html>
-<html>
-<body>
-  <input type="text" id="msgInput">
-  <button onclick="sendMsg()">Send</button>
-  <ul id="messages"></ul>
+// Handle messages
+socket.onmessage = (event) => {
+  console.log('Message received:', event.data);
 
-  <script>
-    const socket = new WebSocket("ws://localhost:8080");
+  // Close the connection after receiving a message
+  socket.close(1000, 'Work complete');
+};
 
-    socket.onmessage = event => {
-      const li = document.createElement("li");
-      li.textContent = event.data;
-      document.getElementById("messages").appendChild(li);
-    };
+// Handle errors
+socket.onerror = (event) => {
+  console.error('WebSocket error:', event);
+};
 
-    function sendMsg() {
-      const msg = document.getElementById("msgInput").value;
-      socket.send(msg);
-    }
-  </script>
-</body>
-</html>
+// Handle connection close
+socket.onclose = (event) => {
+  console.log('Connection closed. Code:', event.code, 'Reason:', event.reason);
+};
 ```
