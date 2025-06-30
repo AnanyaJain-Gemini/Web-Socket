@@ -1,13 +1,13 @@
 # Web Socket
 
-### What is web socket?
+### 🔹What is web socket?
 WebSocket is a **computer communications protocol** that provides **full-duplex (two-way)** communication channels over a **single TCP connection**. It is designed to be used in **real-time web applications** and enables low-latency communication between the client and the server.
 
 It is standardized by ***RFC 6455*** and supported by most modern browsers and servers.
 
 > WebSocket in the computer world — a two-way (bi-directional), constant communication line between your browser (client) and a server.
 
-### Traditional HTTP vs WebSocket:
+### 🔹Traditional HTTP vs WebSocket:
 | Feature       | HTTP                     | WebSocket                    |
 | ------------- | ------------------------ | ---------------------------- |
 | Communication | Request/Response         | Full-duplex                  |
@@ -16,14 +16,14 @@ It is standardized by ***RFC 6455*** and supported by most modern browsers and s
 | Use case      | Standard websites, APIs  | Real-time apps (chat, games) |
 
 
-### How WebSocket Works:
+### 🔹How WebSocket Works:
 
 1. **Initial Handshake** – Client requests WebSocket upgrade using an HTTP request.
 2. **Upgrade to WebSocket** – Server responds and agrees to upgrade protocol.
 3. **Persistent Connection** – The connection remains open.
 4. **Data Exchange** – Both client and server can send messages any time.
 
-### WebSocket vs Socket.IO:
+### 🔹WebSocket vs Socket.IO:
 | Feature          | WebSocket             | Socket.IO                              |
 | ---------------- | --------------------- | -------------------------------------- |
 | Protocol         | Native                | Custom on top of WebSocket + fallbacks |
