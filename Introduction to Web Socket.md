@@ -37,7 +37,8 @@ It is standardized by ***RFC 6455*** and supported by most modern browsers and s
 ### 🔹Basic Example – Chat App:
 
 A simple browser-based chat using WebSocket.
-**Server - Node.js with `ws`:**
+
+**- Server - Node.js with `ws`:**
 ```js
 // server.js
 const WebSocket = require('ws');
@@ -59,7 +60,7 @@ server.on('connection', socket => {
   socket.on('close', () => console.log('Client disconnected'));
 });
 ```
-**Client-side HTML + JS**
+**- Client-side HTML + JS**
 ```html
 <!DOCTYPE html>
 <html>
