@@ -33,3 +33,55 @@ It is standardized by ***RFC 6455*** and supported by most modern browsers and s
 | Ease of Use      | Lower-level           | High-level API                         |
 
 > **When to use Socket.IO:** When you need robust support, fallback, auto-reconnect, and rooms.
+
+### 🔹Basic Example – Chat App:
+
+A simple browser-based chat using WebSocket.
+**Server - Node.js with `ws`:**
+```js
+// server.js
+const WebSocket = require('ws');
+const server = new WebSocket.Server({ port: 8080 });
+
+server.on('connection', socket => {
+  console.log('Client connected');
+
+  socket.on('message', message => {
+    console.log(`Received: ${message}`);
+    // Broadcast to all connected clients
+    server.clients.forEach(client => {
+      if (client.readyState === WebSocket.OPEN) {
+        client.send(`Echo: ${message}`);
+      }
+    });
+  });
+
+  socket.on('close', () => console.log('Client disconnected'));
+});
+```
+**Client-side HTML + JS**
+```html
+<!DOCTYPE html>
+<html>
+<body>
+  <input type="text" id="msgInput">
+  <button onclick="sendMsg()">Send</button>
+  <ul id="messages"></ul>
+
+  <script>
+    const socket = new WebSocket("ws://localhost:8080");
+
+    socket.onmessage = event => {
+      const li = document.createElement("li");
+      li.textContent = event.data;
+      document.getElementById("messages").appendChild(li);
+    };
+
+    function sendMsg() {
+      const msg = document.getElementById("msgInput").value;
+      socket.send(msg);
+    }
+  </script>
+</body>
+</html>
+```
