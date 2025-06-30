@@ -199,7 +199,7 @@ server.on('connection', (socket) => {
 | `extensions`     | Negotiated extensions (e.g., compression)         |
 
 
-## 🔹What is `.on`?
+# 🔹What is `.on`?
 `.on` is a method used to register event listeners — meaning:
 
 > “When this event happens, run this function.”
