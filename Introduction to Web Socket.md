@@ -198,3 +198,23 @@ server.on('connection', (socket) => {
 | `binaryType`     | `"blob"` (default) or `"arraybuffer"`; `"nodebuffer"` default in Node.js            |
 | `extensions`     | Negotiated extensions (e.g., compression)         |
 
+
+## 🔹What is `.on`?
+`.on` is a method used to register event listeners — meaning:
+
+> “When this event happens, run this function.”
+
+It's part of the **event-driven programming model** in JavaScript and Node.js. You see it with:
+- Native `EventEmitter` (Node.js)
+- WebSocket servers like `ws`
+- Libraries like `Socket.IO`
+
+**🔹Basic Syntax:**
+```js
+socket.on(""eventName", callbackFunction);
+```
+| Term               | Meaning                                                                           |
+| ------------------ | --------------------------------------------------------------------------------- |
+| `"eventName"`      | Name of the event you want to listen to (e.g., `"message"`, `"close"`, `"error"`) |
+| `callbackFunction` | Code to run when the event happens                                                |
+
