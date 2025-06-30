@@ -34,9 +34,7 @@ It is standardized by ***RFC 6455*** and supported by most modern browsers and s
 
 > **When to use Socket.IO:** When you need robust support, fallback, auto-reconnect, and rooms.
 
-### 🔹Basic Example:
-
-**->  Client-Side WebSocket Connections (Browser or Frontend):**
+### 🔹Client-Side WebSocket Connections (Browser or Frontend):
 
  **1. Browser-native WebSocket API** (Standard way)
 ```js
