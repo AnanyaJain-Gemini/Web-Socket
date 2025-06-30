@@ -81,3 +81,54 @@ socket.emit("message", "Hello Server!");
 socket.on("message", (data) => console.log(data));
 ```
 > Socket.IO is not pure WebSocket — it's a custom protocol built over WebSocket/HTTP.
+
+### 🔹Server-Side WebSocket Setup (Node.js)
+
+#### **1. Using ws (native WebSocket lib)**
+
+a. **Standalone server (no HTTP)**
+
+This is a pure WebSocket Server. This creates a standalone WebSocket server that directly listens on a port (like 8080), without using Express or HTTP server.
+```js
+import {WebSocket} from "ws";
+
+// specify the port for the standalone web-socket server
+const wss = new WebSocket.Server({port: 8080});
+
+wss.on('connection', (socket) => {
+  console.log('Client connected');
+});
+```
+b. **Attach to existing HTTP/Express server**
+
+This is attached on top of an existing HTTP server (created using `http.createServer()` or `Express`).
+```js
+import http from "http";
+import {WebSocket} from "ws";
+
+const server = http.createServer(app);
+const wss = new WebSocket.Server({ server });
+
+wss.on('connection', (socket) => {
+  console.log('WebSocket client connected');
+});
+
+server.listen(8080, () => {
+  console.log('HTTP + WS server on http://localhost:8080');
+});
+```
+#### **2. Using `Socket.IO` (higher-level abstraction)**
+```js
+import { Server } from "socket.io";
+
+const io = new Server(server); // server = http.createServer(app)
+
+io.on("connection", (socket) => {
+  console.log("Socket connected");
+
+  socket.on("message", (msg) => {
+    socket.broadcast.emit("message", msg);
+  });
+});
+```
+> Socket.IO is not directly compatible with `new WebSocket(...)` unless you use its client lib (`socket.io-client`).
