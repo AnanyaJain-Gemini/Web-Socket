@@ -143,6 +143,7 @@ io.on("connection", (socket) => {
 ### 🔹WebSocket Events:
 
 1. **Client-side WebSocket** (in browser)
+   
 | Event       | Triggered When               |
 | ----------- | ---------------------------- |
 | `onopen`    | Connection is established    |
@@ -162,6 +163,7 @@ socket.onclose = () => console.log("Disconnected");
 ```
 
 2. **Server-side WebSocket** (Node.js using `ws`)
+   
 | Event        | Triggered When       |
 | ------------ | -------------------- |
 | `connection` | A client connects    |
