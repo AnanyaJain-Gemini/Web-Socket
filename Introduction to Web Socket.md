@@ -36,7 +36,9 @@ It is standardized by ***RFC 6455*** and supported by most modern browsers and s
 
 ### 🔹Basic Example:
 
-**->  To connect a Browser(Frontend) to a WebSocket server:**
+**->  Client-Side WebSocket Connections (Browser or Frontend):**
+
+ **1. Browser-native WebSocket API** (Standard way)
 ```js
 // Create a new WebSocket connection
 const socket = new WebSocket('wss://echo.websocket.org');
@@ -67,3 +69,17 @@ socket.onclose = (event) => {
   console.log('Connection closed. Code:', event.code, 'Reason:', event.reason);
 };
 ```
+
+**2. Using libraries or wrappers** - **Socket.IO** (most common alternative)
+
+Socket.IO wraps WebSocket + adds features like reconnect, fallback (HTTP polling), namespaces, etc.
+
+```js
+import { io } from "socket.io-client";
+
+const socket = io("http://localhost:3000");
+
+socket.emit("message", "Hello Server!");
+socket.on("message", (data) => console.log(data));
+```
+> Socket.IO is not pure WebSocket — it's a custom protocol built over WebSocket/HTTP.
