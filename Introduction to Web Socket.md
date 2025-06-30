@@ -36,6 +36,7 @@ It is standardized by ***RFC 6455*** and supported by most modern browsers and s
 
 ### 🔹Basic Example:
 
+**->  To connect a Browser(Frontend) to a WebSocket server:**
 ```js
 // Create a new WebSocket connection
 const socket = new WebSocket('wss://echo.websocket.org');
