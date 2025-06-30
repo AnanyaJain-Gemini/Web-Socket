@@ -133,3 +133,66 @@ io.on("connection", (socket) => {
 });
 ```
 > Socket.IO is not directly compatible with `new WebSocket(...)` unless you use its client lib (`socket.io-client`).
+
+
+### 🔹WebSocket Methods:
+
+1. `WebSocket.send(data, [callback])`: Send a message or data (text or binary) to the server or client.
+2. `WebSocket.close([code, reason])`: Close the connection gracefully
+
+### 🔹WebSocket Events:
+
+1. **Client-side WebSocket** (in browser)
+| Event       | Triggered When               |
+| ----------- | ---------------------------- |
+| `onopen`    | Connection is established    |
+| `onmessage` | Message received from server |
+| `onerror`   | Error occurs in connection   |
+| `onclose`   | Connection is closed         |
+
+Example:
+
+```js
+const socket = new WebSocket("ws://localhost:8080");
+
+socket.onopen = () => console.log("Connected!");
+socket.onmessage = (e) => console.log("Message:", e.data);
+socket.onerror = (e) => console.error("Error:", e);
+socket.onclose = () => console.log("Disconnected");
+```
+
+2. **Server-side WebSocket** (Node.js using `ws`)
+| Event        | Triggered When       |
+| ------------ | -------------------- |
+| `connection` | A client connects    |
+| `message`    | Client sends message |
+| `close`      | Client disconnects   |
+| `error`      | Connection error     |
+
+Example:
+
+```js
+import WebSocket from "ws";
+const server = new WebSocket.Server({ port: 8080 });
+
+server.on('connection', (socket) => {
+  console.log("Client connected");
+
+  socket.send("Welcome!");
+
+  socket.on('message', (msg) => console.log("Received:", msg));
+  socket.on('close', () => console.log("Client disconnected"));
+  socket.on('error', (err) => console.error("Error:", err));
+});
+```
+
+### 🔹WebSocket Properties:
+| Property         | Meaning                                           |
+| ---------------- | ------------------------------------------------- |
+| `url`            | URL of the server or client you're connected to             |
+| `readyState`     | 0 (CONNECTING), 1 (OPEN), 2 (CLOSING), 3 (CLOSED) |
+| `protocol`       | Subprotocol agreed (if any)                   |
+| `bufferedAmount` | Bytes of data queued for sending (client-side only)                 |
+| `binaryType`     | `"blob"` (default) or `"arraybuffer"`; `nodebuffer` default in Node.js            |
+| `extensions`     | Negotiated extensions (e.g., compression)         |
+
